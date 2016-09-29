@@ -1,0 +1,14 @@
+{% extends "klab/base.html" %}
+{% block content %}
+{% for post in posts %}
+<div class="post">
+    <h1>
+        <a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a>
+    </h1>
+    <p>{{  post.text |truncatewords:"100" }}<a href="{% url 'post_detail' pk=post.pk %}"> read more...</a></p>
+    <div class="date">
+      
+    </div>
+</div>
+{% endfor %}
+{% endblock %}

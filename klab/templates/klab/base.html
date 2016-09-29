@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Henry Tech</title>
+        <!-- BootStrap -->
+        <link rel="stylesheet" href="{% static "dist/css/bootstrap.min.css"%}">
+        <link rel="stylesheet" href="{% static "dist/css/bootstrap-theme.min.css"%}">
+        <link rel="stylesheet" href="{% static "dist/css/klab.css"%}">
+        <style>
+            .color-me{
+                color: aliceblue
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Navbar -->
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container lesspadding">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button> <!-- End Button -->
+                    <a href="" class="navbar-brand">Henry Tech</a>
+                </div> <!-- End Navbar Header -->
+                <div class="navbar-collapse collapse" id="navbar">
+                    <ul class="nav navbar-nav">
+                        <li><a href="/">Blog</a></li>
+                        <li><a href="">Services</a></li>
+                        <li><a href="">Contact</a></li>
+                        <li><a href="">About</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                           <li class="color-me">{% if user.is_authenticated %} 
+                            welcome {{user.username}}</li>  
+                        <li class="color-me"><a href="/accounts/logout">logout</a></li>
+                            
+                            {% else %}
+                            <li class="color-me"><a href="/accounts/login">login</a></li>
+                            <li class="color-me"><a href="/accounts/register">Register</a></li>
+                            {% endif %}
+                        
+                    </ul>
+                </div> <!-- End navbar collapse -->
+            </div> <!-- End Container -->
+        </nav> <!-- End Navbar -->
+        
+        <div class="page-header">
+            
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    {% block content %}
+                    {% endblock %}
+                    
+                </div>
+            
+            </div> <!-- End class row -->
+        
+        </div> <!-- End Container -->
+        
+        <!-- JQuery (necessary for bootstrap plugins) -->
+        <script src="{% static "dist/js/jquery.js"%}"></script>
+        
+        <!-- Bootstrap Minified -->
+        <script src="{% static "dist/js/bootstrap.min.js"%}"></script>
+    </body>
+</html>

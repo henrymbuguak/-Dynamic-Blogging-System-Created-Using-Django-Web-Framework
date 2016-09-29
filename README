@@ -1,0 +1,57 @@
+            Dynamic Blogging System Created Using Django Web Framework
+
+Django is one of the most powerful web framework for creating complex websites. Some of the well know sites 
+powered by Django include but not limited to Bitbucket, Instagram, Mozilla and Washington Times. In this 
+project I am trying to create a blog system that is powered by Django, python and front end I am using 
+Twitter Bootstrap
+
+Requirement
+
+-Django version 1.10.1
+-Python 2.7.6
+
+So far this project include the following completed features:
+
+       1) A blog page the shows 5 recent post based on published date. The Post are in summary(post except).Here 
+        is a sample code:
+              {% extends "klab/base.html" %}
+                 {% block content %}
+                  {% for post in posts %}
+                      <div class="post">
+                           <h1>
+                           <a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a>
+                           </h1>
+                          <p>{{  post.text |truncatewords:"100" }}<a href="{% url 'post_detail' pk=post.pk %}"> read more...</a></p>
+                          <div class="date">
+      
+                         </div>
+                         </div>
+                 {% endfor %}
+            {% endblock %}
+       in the above code, every post is truncated to 100 words and you can click read more to read the full post.
+
+      2) Another feature that is implement in this system is the ability to Register, Login and Logout user. Here is a sample
+         register code in views.py 
+
+def register_page(request):
+    if request.method == 'POST':
+        form = RegistrationForm(request.POST)
+        if form.is_valid():
+            user = User.objects.create_user(
+                username = form.cleaned_data['username'],
+                password = form.cleaned_data['password1'],
+                email = form.cleaned_data['email']
+            )
+            return HttpResponseRedirect('/register/success/')
+    else:
+        form = RegistrationForm()
+    variables = RequestContext(request, {
+        'form': form
+    })
+    return render(request, 'registration/register_page.html', {'form': form})
+
+I will keep updating  this project with new features as I keep working on it.
+
+NOTE:
+If you decided to use this code to implement recall to change DEBUG MODE to false in settings.py due to security reason. Otherwise Download an improve on this
+code
