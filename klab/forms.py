@@ -37,3 +37,10 @@ class RegistrationForm(forms.Form):
         except ObjectDoesNotExist:
             return username
         raise forms.ValidationError('Username is already taken.')
+        
+class ContactForm(forms.Form):
+    contact_name = forms.CharField(label= 'Your Name', max_length = 30)
+    contact_email = forms.EmailField(label = 'Email')
+    content = forms.CharField(required=True, widget=forms.Textarea())
+    
+  

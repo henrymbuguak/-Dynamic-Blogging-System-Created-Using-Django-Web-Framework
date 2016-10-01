@@ -32,7 +32,7 @@
                     <ul class="nav navbar-nav">
                         <li><a href="/">Blog</a></li>
                         <li><a href="">Services</a></li>
-                        <li><a href="">Contact</a></li>
+                        <li><a href="/contact">Contact</a></li>
                         <li><a href="">About</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
@@ -55,13 +55,26 @@
         </div>
         <div class="container">
             <div class="row">
-                <div class="col-md-8">
+                <div class="col-sm-8 blog-main">
                     {% block content %}
                     {% endblock %}
                     
                 </div>
+                  <div class="col-sm-3 offset-sm-1 blog-sidebar">
+                <div class="sidebar-module sidebar-module-inset">
+                    <h4>Archives</h4>
+                    <div class="post">
+                        {% for post in posts %}
+                        <ol class="list-unstyled">
+                            <li><a href="{% url 'post_detail' pk=post.pk %}">{{ post.published_date }}</a></li>
+                        </ol>
+                         {% endfor %}
+                    </div>
+                </div>
+            </div> <!-- End sidebar -->
             
             </div> <!-- End class row -->
+          
         
         </div> <!-- End Container -->
         

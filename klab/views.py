@@ -59,3 +59,19 @@ def register_page(request):
         'form': form
     })
     return render(request, 'registration/register_page.html', {'form': form})
+
+def contact_page(request):
+    if request.method =='POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            contact_name = form.cleaned_data['contact_name'],
+            contact_email = form.cleaned_data['contact_email'],
+            content = form.cleaned_data['content']
+            
+            return HttpResponseRedirect('klab/message.html')
+    else:
+        form = ContactForm()
+    variables = RequestContext(request, {
+        'form':form
+    })
+    return render(request, 'klab/contact_page.html', {'form':form})

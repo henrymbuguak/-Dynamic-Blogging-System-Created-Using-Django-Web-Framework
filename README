@@ -12,7 +12,8 @@ Requirement
 
 So far this project include the following completed features:
 
-       1) A blog page the shows 5 recent post based on published date. The Post are in summary(post except).Here 
+
+1) A blog page the shows 5 recent post based on published date. The Post are in summary(post except).Here 
         is a sample code:
               {% extends "klab/base.html" %}
                  {% block content %}
@@ -30,7 +31,8 @@ So far this project include the following completed features:
             {% endblock %}
        in the above code, every post is truncated to 100 words and you can click read more to read the full post.
 
-      2) Another feature that is implement in this system is the ability to Register, Login and Logout user. Here is a sample
+
+2) Another feature that is implement in this system is the ability to Register, Login and Logout user. Here is a sample
          register code in views.py 
 
 def register_page(request):
@@ -49,6 +51,27 @@ def register_page(request):
         'form': form
     })
     return render(request, 'registration/register_page.html', {'form': form})
+
+3) Another feature in this blog system is the ability to get our archives from the database dynamically, now our archives are listed on our 
+sidebar. Here is the code:
+
+
+ <div class="col-sm-3 offset-sm-1 blog-sidebar">
+                <div class="sidebar-module sidebar-module-inset">
+                    <h4>Archives</h4>
+                    <div class="post">
+                        {% for post in posts %}
+                        <ol class="list-unstyled">
+                            <li><a href="{% url 'post_detail' pk=post.pk %}">{{ post.published_date }}</a></li>
+                        </ol>
+                         {% endfor %}
+                    </div>
+                </div>
+            </div> 
+
+
+
+
 
 I will keep updating  this project with new features as I keep working on it.
 
