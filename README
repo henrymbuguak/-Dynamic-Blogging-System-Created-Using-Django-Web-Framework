@@ -32,7 +32,7 @@ So far this project include the following completed features:
        in the above code, every post is truncated to 100 words and you can click read more to read the full post.
 
 
-2) Another feature that is implement in this system is the ability to Register, Login and Logout user. Here is a sample
+2) Another feature that is implemented in this system is the ability to Register, Login and Logout user. Here is a sample
          register code in views.py 
 
 def register_page(request):
@@ -69,12 +69,38 @@ sidebar. Here is the code:
                 </div>
             </div> 
 
+4) I have added another feature to this project. In every blog/website you need a way for your customer to contact you. Well I have added a simple
+contact form to our blog system. Upon successful form submission, the sender is greeted by a success message. Here is our code that goes into the
+views.py 
 
+
+def contact_page(request):
+    if request.method =='POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            subject = form.cleaned_data['subject']
+            message = form.cleaned_data['message']
+            sender = form.cleaned_data['sender']
+            cc_myself = form.cleaned_data['cc_myself']
+            recipients = ['info@example.com']
+            if cc_myself:
+                recipients.append(sender)
+                send_mail(subject, message, sender, recipients)
+            
+            return HttpResponseRedirect( '/contact/success/')
+    else:
+        form = ContactForm()
+    variables = RequestContext(request, {
+        'form':form
+    })
+    return render(request, 'klab/contact_page.html', {'form':form}) 
 
 
 
 I will keep updating  this project with new features as I keep working on it.
 
 NOTE:
-If you decided to use this code to implement recall to change DEBUG MODE to false in settings.py due to security reason. Otherwise Download an improve on this
-code
+-If you decided to use this code to implement you system recall to change DEBUG MODE to false in settings.py due to security reason.
+-Then make sure you create an automated Test, this will help you to fix bugs and beside its a good way of programming
+
+Otherwise Download and an improve on this code depending your needs

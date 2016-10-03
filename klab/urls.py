@@ -12,4 +12,5 @@ urlpatterns = [
     url(r'^accounts/register/$', views.register_page),
     url(r'^register/success/$', TemplateView.as_view(template_name='registration/register_success.html')),
     url(r'^contact/$', views.contact_page),
+    url(r'^contact/success/$', TemplateView.as_view(template_name='klab/message.html'))
 ]

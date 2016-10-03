@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
 from django.contrib.auth import logout
+from django.core.mail import send_mail
 
 from django.template import Context, RequestContext
 from django.template.loader import get_template
@@ -64,11 +65,16 @@ def contact_page(request):
     if request.method =='POST':
         form = ContactForm(request.POST)
         if form.is_valid():
-            contact_name = form.cleaned_data['contact_name'],
-            contact_email = form.cleaned_data['contact_email'],
-            content = form.cleaned_data['content']
+            subject = form.cleaned_data['subject']
+            message = form.cleaned_data['message']
+            sender = form.cleaned_data['sender']
+            cc_myself = form.cleaned_data['cc_myself']
+            recipients = ['info@example.com']
+            if cc_myself:
+                recipients.append(sender)
+                send_mail(subject, message, sender, recipients)
             
-            return HttpResponseRedirect('klab/message.html')
+            return HttpResponseRedirect( '/contact/success/')
     else:
         form = ContactForm()
     variables = RequestContext(request, {
